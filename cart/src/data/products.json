@@ -1,0 +1,39 @@
+{
+    "products": [
+        {
+            "id": 1,
+            "title": "Only by the night",
+            "subtitle": "Kings of Leon",
+            "price": 1059,
+            "image": "https://is5-ssl.mzstatic.com/image/thumb/Features125/v4/74/25/4c/74254c8b-e03d-44e8-304d-4cde508b8cfb/dj.swemfdrr.jpg/600x600bb.jpg"
+        },
+        {
+            "id": 2,
+            "title": "Melophobia",
+            "subtitle": "Cage the Elephant",
+            "price": 1123,
+            "image": "https://is4-ssl.mzstatic.com/image/thumb/Music115/v4/73/34/af/7334affd-fc75-b3f7-04de-fad6e9f54c69/886444143073.jpg/600x600bb.jpg"
+        },
+        {
+            "id": 3,
+            "title": "Day & Age",
+            "subtitle": "The Killers",
+            "price": 1499,
+            "image": "https://is4-ssl.mzstatic.com/image/thumb/Music115/v4/fc/9d/55/fc9d55fe-7512-2896-c431-93faa0f8b215/00602557785685.rgb.jpg/600x600bb.jpg"
+        },
+        {
+            "id": 4,
+            "title": "Ten",
+            "subtitle": "Pearl Jam",
+            "price": 1200,
+            "image": "https://is3-ssl.mzstatic.com/image/thumb/Music125/v4/5e/91/c1/5e91c1ba-53cb-c5c8-15f1-d3c81f3b3592/dj.psrqglcw.jpg/600x600bb.jpg"
+        },
+        {
+            "id": 5,
+            "title": "Urban Hymns",
+            "subtitle": "The Verve",
+            "price": 1299,
+            "image": "https://is4-ssl.mzstatic.com/image/thumb/Music124/v4/02/b2/68/02b268c7-a234-cb8b-7ef3-a774340744eb/17UM1IM02768.rgb.jpg/600x600bb.jpg"
+        }
+    ]
+}

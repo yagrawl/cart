@@ -1,0 +1,29 @@
+@import 'base/variables';
+@import 'base/font';
+
+body {
+    margin: 0;
+    font-family: $font-family;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.main {
+    max-width: $viewport-width;
+    padding: $viewport-padding;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+.catalog {
+    float: left;
+    width: 70%;
+}
+
+.cart {
+    float: right;
+}
+
+.clear { 
+    clear: both;
+}

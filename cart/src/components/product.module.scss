@@ -1,0 +1,113 @@
+.container {
+    padding: 15px;
+    width: 140px;
+    border: 0.1px solid #BEBEBE;
+    border-radius: 5px;
+    display: inline;
+    float: left;
+    margin: 10px;
+}
+
+.image {
+    border-radius: 5px;
+    max-width: 140px;
+}
+
+.details {
+    font-size: 16px;
+    margin-top: 5px;
+}
+
+.details > p {
+    margin: 0;
+}
+
+.title {
+    font-weight: 600;
+}
+
+.subtitle {
+    font-weight: 200;
+}
+
+.price {
+    font-size: 24px;
+    font-weight: 600;
+}
+
+.fractional {
+    font-size: 12px;
+}
+
+.addToCartDiv,
+.addToCartButton {
+    display: block;
+    margin: 0 auto;
+    margin-top: 20px;
+    padding: 12px 0;
+    border-radius: 20px;
+    background-color: #046865;
+    border: none;
+    color: white;
+    font-size: 16px;
+    width: 140px;
+    text-align: center;
+}
+
+.addToCartButton {
+    height: 46px;
+    transition: all .2s ease-in-out;
+}
+
+.addToCartDiv {
+    height: 22px;
+}
+
+.addToCartButton:hover,
+.addToCartButtonBase:hover {
+    background-color: #023B39;
+    transform: scale(1.1, 1.1);
+    -webkit-transform: scale(1.1, 1.1);
+    -moz-transform: scale(1.1, 1.1);
+}
+
+.incrementButton,
+.decrementButton {
+    float: left;
+    margin-left: 15px;
+    background-color: #046865;
+    border: none;
+    color: white;
+    font-size: 16px;
+    font-weight: 600;
+    width: 32px;
+    height: 32px;
+    margin-top: -4px;
+}
+
+.incrementButton::before,
+.decrementButton::before,
+.incrementButton::after,
+.decrementButton::after {
+    content: "     ";
+}
+
+.incrementButton {
+    float: right;
+    margin-left: 0;
+    margin-right: 15px;
+}
+
+.decrementButton:hover,
+.incrementButton:hover {
+    background-color: #023B39;
+    border-radius: 20px;
+}
+
+.quantity {
+    font-weight: 400;
+}
+
+.react-icons {
+    color: white;
+}
