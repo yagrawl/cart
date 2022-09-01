@@ -25,7 +25,7 @@
             "id": 4,
             "title": "Ten",
             "subtitle": "Pearl Jam",
-            "price": 1200,
+            "price": 1221,
             "image": "https://is3-ssl.mzstatic.com/image/thumb/Music125/v4/5e/91/c1/5e91c1ba-53cb-c5c8-15f1-d3c81f3b3592/dj.psrqglcw.jpg/600x600bb.jpg"
         },
         {
@@ -34,6 +34,20 @@
             "subtitle": "The Verve",
             "price": 1299,
             "image": "https://is4-ssl.mzstatic.com/image/thumb/Music124/v4/02/b2/68/02b268c7-a234-cb8b-7ef3-a774340744eb/17UM1IM02768.rgb.jpg/600x600bb.jpg"
+        },
+        {
+            "id": 6,
+            "title": "Abbey Road",
+            "subtitle": "The Beatles",
+            "price": 2099,
+            "image": "https://is1-ssl.mzstatic.com/image/thumb/Music112/v4/df/db/61/dfdb615d-47f8-06e9-9533-b96daccc029f/18UMGIM31076.rgb.jpg/600x600bb.jpg"
+        },
+        {
+            "id": 7,
+            "title": "Wilder Mind",
+            "subtitle": "Mumford & Sons",
+            "price": 1549,
+            "image": "https://is3-ssl.mzstatic.com/image/thumb/Music124/v4/23/57/bf/2357bf2e-5a16-e45d-40b9-6da406ff1a46/602547279422_1.jpg/600x600bb.jpg"
         }
     ]
 }

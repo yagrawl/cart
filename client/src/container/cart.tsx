@@ -1,17 +1,21 @@
 import React from 'react';
-import { useAppSelector } from '../app/hooks';
+import { useAppSelector, useAppDispatch } from '../app/hooks';
 import { selectCart } from '../reducers/cartSlice';
+import { changeStep } from '../reducers/flowSlice';
 import { getDisplayAmount } from '../utils/amount';
+import emptyCartImage from '../assets/images/emptyCart.png';
 import styles from './cart.module.scss';
+import { createOrder } from '../requests/order';
 
 const Cart = () => {
+    const dispatch = useAppDispatch();
     const cart = useAppSelector(selectCart);
     const renderCart = () => {
         const items = cart.map(item => {
             const itemTotal = getDisplayAmount(item.price * item.quantity);
             const displayPrice = getDisplayAmount(item.price);
             return (
-                <div className={styles.cartItemContainer}>
+                <div className={styles.cartItemContainer} key={item.id}>
                     <img className={styles.cartItemImage} src={item.image} alt={"product visual"}/>
                     <p className={styles.cartItemDetails}>
                         <span className={styles.cartItemTitle}>{item.title}</span>
@@ -27,7 +31,21 @@ const Cart = () => {
             )
         });
 
+        if(items.length === 0) {
+            return (
+                <div className={styles.emptyCartContainer}>
+                    <img src={emptyCartImage} className={styles.emptyCartImage} alt={"empty cart"}/>
+                    <p className={styles.emptyCartText}>Your cart is empty. Add items to get started.</p>
+                </div>
+            );
+        }
+
         return items;
+    }
+
+    const renderCheckout = async () => {
+        const order = await createOrder(cart);
+        dispatch(changeStep({ step: "checkout", orderId: order.data.token }));
     }
 
     const calculateTotal = () => {
@@ -36,11 +54,14 @@ const Cart = () => {
         const cartTotal = getDisplayAmount(total);
 
         return total ? (
-            <p>Total&nbsp; 
-                <span className={styles.cartTotal}>
-                    {`${cartTotal.currency}${cartTotal.whole}.${cartTotal.fractional}`}
-                </span>
-            </p>
+            <div>
+                <p>Total&nbsp; 
+                    <span className={styles.cartTotal}>
+                        {`${cartTotal.currency}${cartTotal.whole}.${cartTotal.fractional}`}
+                    </span>
+                </p>
+                <button className={styles.seeMyCartButton} onClick={renderCheckout}>See my cart</button>
+            </div>
         ) : null;
     }
 

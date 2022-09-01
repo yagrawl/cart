@@ -36,3 +36,28 @@
 .clear {
     clear: both;
 }
+
+.seeMyCartButton {
+    width: 100%;
+    height: 48px;
+    border: none;
+    border-radius: 10px;
+    background-color: #046865;
+    color: white;
+    font-weight: 200;
+    font-size: 16px;
+}
+
+.emptyCartContainer {
+    text-align: center;
+}
+
+.emptyCartImage {
+    display: block;
+    margin: auto;
+    max-width: 100px;
+}
+
+.emptyCartText {
+    max-width: 150px;
+}

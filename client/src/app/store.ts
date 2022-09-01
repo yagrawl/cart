@@ -1,9 +1,11 @@
 import { configureStore, ThunkAction, Action } from '@reduxjs/toolkit';
 import cartReducer from '../reducers/cartSlice';
+import flowReducer from '../reducers/flowSlice';
 
 export const store = configureStore({
   reducer: {
     cart: cartReducer,
+    flow: flowReducer,
   },
 });
 
