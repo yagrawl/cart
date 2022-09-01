@@ -3,11 +3,12 @@ import fetch from 'node-fetch';
 import { v4 as uuid } from 'uuid';
 
 const router = express.Router();
+const BOLT_API_KEY = "https://api-sandbox.bolt.com";
 
 router.post('/create', async (req, res) => {
     const cart = req.body;
     const request = generateBoltOrderRequest(cart);
-    const url = `${process.env.BOLT_URL}/v1/merchant/orders`;
+    const url = `${BOLT_URL}/v1/merchant/orders`;
     const response = await fetch(url, {
         method: "post",
         body: JSON.stringify(request),
