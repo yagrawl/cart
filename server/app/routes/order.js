@@ -3,7 +3,7 @@ import fetch from 'node-fetch';
 import { v4 as uuid } from 'uuid';
 
 const router = express.Router();
-const BOLT_API_KEY = "https://api-sandbox.bolt.com";
+const BOLT_URL = "https://api-sandbox.bolt.com";
 
 router.post('/create', async (req, res) => {
     const cart = req.body;
