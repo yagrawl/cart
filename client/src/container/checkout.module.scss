@@ -1,3 +1,5 @@
+@import '../styles/base/variables';
+
 .token {
     font-size: 20px;
     font-weight: 400;
@@ -9,4 +11,16 @@
     border-radius: 5px;
     background-color: #59C9A5;
     color: #E0F5EE;
+}
+
+.emailInput {
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: 16px;
+    border: 0.2px solid;
+    font-family: $font-family;
+}
+
+.guestCheckoutContainer {
+    margin-top: 20px;
 }
