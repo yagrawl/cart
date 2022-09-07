@@ -5,6 +5,7 @@ import { v4 as uuid } from 'uuid';
 const router = express.Router();
 const BOLT_URL = "https://api-sandbox.bolt.com";
 
+//TODO: Migrate to go backend to consolidate logic
 router.post('/create', async (req, res) => {
     const cart = req.body;
     const request = generateBoltOrderRequest(cart);
