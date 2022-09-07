@@ -1,13 +1,14 @@
 import React, { useState, useRef } from 'react';
 import { useAppSelector } from '../app/hooks';
 import { selectOrderId } from '../reducers/flowSlice';
+import { checkAccount } from '../requests/embedded';
 import useScript from '../utils/hooks/useScript';
 import styles from './checkout.module.scss';
 
 const CDN_URL = "https://connect-sandbox.bolt.com";
 const PUBLISHABLE_KEY = "FILL_IN";
 const BUTTON_BASE_URL = "https://connect-sandbox.bolt.com/v1/checkout_button";
-
+const EMAIL_VALIDATION_REGEX = /^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/;
 
 // TODO: Move to annother class
 class AccountStore {
@@ -47,40 +48,49 @@ async function post(url: string, data: string) {
 
 const Checkout = () => {
     const orderId = useAppSelector(selectOrderId);
-    // TODO: Having issues with not being to access elements in the DOM - this seemed to have fixed it
     const emailRef = useRef(null)
     const [checkoutSuccessful, setCheckoutSuccessful] = useState(false);
+    const [email, setEmail] = useState("");
 
     useScript(`${CDN_URL}/track.js`, "bolt-track", "text/javascript", [{ key: "data-publishable-key", value: PUBLISHABLE_KEY }]);
     useScript(`${CDN_URL}/connect.js`, "bolt-connect", "text/javascript", [{ key: "data-publishable-key", value: PUBLISHABLE_KEY }]);
     useScript(`${CDN_URL}/embed-accounts.js`, "bolt-embedded-accounts", "text/javascript", []);
 
+    const handleEmailUpdate = async (e: React.ChangeEvent<HTMLInputElement>) => {
+        const input = e.target.value
+        setEmail(input);
 
-    // Not Used yet
-    async function accountExists(email: string) {
-        const response = await fetch("https://api-sandbox.bolt.com/v1/account/exists?email=" +
-            encodeURIComponent(email));
-        const responseAsJson = await response.json();
-        console.log(responseAsJson)
-        return responseAsJson.has_bolt_account;
+        if(EMAIL_VALIDATION_REGEX.test(input)) {
+            const hasBoltAccount = await accountExists(input);
+            if(hasBoltAccount) {
+                loadEmbedded(input);
+            }
+        }
     }
 
-    let boltEmbedded, authorizeComponent: any;
-
+    const accountExists = async (email: string) => { 
+        const hasBoltAccount = await checkAccount(email);
+        return hasBoltAccount;
+    };
     
-    async function loadEmbedded() {
-        console.log("load embedded");
-        boltEmbedded = window.Bolt(PUBLISHABLE_KEY);
-        authorizeComponent = boltEmbedded.create("authorization_component",  { style: {position: "right"} });
-        await authorizeComponent.mount(".email-div");
-        let authorizationResponse = await authorizeComponent.authorize({"email": "dev@bolt.com"});
+    const loadEmbedded = async (email: string) => {
+        const boltEmbedded = window.Bolt(PUBLISHABLE_KEY);
+        let authorizationResponse;
+        try {
+            const authorizeComponent = boltEmbedded.create("authorization_component",  { style: { position: "center" } });
+            await authorizeComponent.mount(".email-div");
+
+            authorizationResponse = await authorizeComponent.authorize({"email": email });
+        } catch(error) {
+            console.log('ERROR: ', error);
+        }
+
         console.log(authorizationResponse)
-        let accountStore = new AccountStore(authorizationResponse);
-        let accountSummary = await accountStore.getAccountSummary();
-        console.log(accountSummary)
+
+        // let accountStore = new AccountStore(authorizationResponse);
+        // let accountSummary = await accountStore.getAccountSummary();
+        // console.log(accountSummary)
     }
-
-
 
     const hints = {};
     const cart = {
@@ -104,19 +114,19 @@ const Checkout = () => {
 
     return (
         <div>
-            <div id="email-div" className="email-div" ref={emailRef}>
-                <input type="email" placeholder="bolt-user@example.com" required></input>
-            </div>
-            <button type="button" onClick={loadEmbedded}>Load Embedded</button>
             <p className={styles.token}>Token <strong>{orderId}</strong></p>
-            {checkoutSuccessful ? (
-                <p className={styles.checkoutSuccessful}>Checkout successful!</p>
-            ) : (
+            <div id="email-div" className="email-div" ref={emailRef}>
+                <input type="email" placeholder="Email" required className={styles.emailInput} value={email} onChange={handleEmailUpdate}/>
+            </div>
+            <div className={styles.guestCheckoutContainer}>
+                {checkoutSuccessful ? (
+                    <p className={styles.checkoutSuccessful}>Checkout successful!</p>
+                ) : (
                     <div data-tid="instant-bolt-checkout-button">
                         <object data={`${BUTTON_BASE_URL}?publishable_key=${PUBLISHABLE_KEY}`} aria-label={"bolt-checkout-button"}/>
                     </div>
-                )
-            }
+                )}
+            </div>
         </div>
     );
 }
