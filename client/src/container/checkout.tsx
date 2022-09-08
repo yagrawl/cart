@@ -14,11 +14,11 @@ const EMAIL_VALIDATION_REGEX = /^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/;
 class AccountStore {
     authorization: any;
     constructor(authorization: any) {
-        this.authorization = authorization;
+        this.authorization = authorization
     }
 
     async getAccountSummary() {
-        let response = await post("/account", this.authorization);
+        let response = await post("http://localhost:3333/api/oauth", this.authorization);
         let json = await response.json();
         return json;
     }
@@ -39,11 +39,13 @@ async function post(url: string, data: string) {
     return fetch(url, {
         method: "POST",
         headers: {
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
+            
         },
         body: JSON.stringify(data)
     })
 }
+
 
 
 const Checkout = () => {
@@ -84,12 +86,13 @@ const Checkout = () => {
         } catch(error) {
             console.log('ERROR: ', error);
         }
+        
 
         console.log(authorizationResponse)
 
-        // let accountStore = new AccountStore(authorizationResponse);
-        // let accountSummary = await accountStore.getAccountSummary();
-        // console.log(accountSummary)
+        let accountStore = new AccountStore(authorizationResponse);
+        let accountSummary = await accountStore.getAccountSummary();
+        console.log(accountSummary)
     }
 
     const hints = {};

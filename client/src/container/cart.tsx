@@ -45,7 +45,7 @@ const Cart = () => {
 
     const renderCheckout = async () => {
         const order = await createOrder(cart);
-        dispatch(changeStep({ step: "checkout", orderId: order.data.token }));
+        dispatch(changeStep({ step: "checkout", orderId: order.token }));
     }
 
     const calculateTotal = () => {
