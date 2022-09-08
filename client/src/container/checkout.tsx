@@ -6,7 +6,7 @@ import useScript from '../utils/hooks/useScript';
 import styles from './checkout.module.scss';
 
 const CDN_URL = "https://connect-sandbox.bolt.com";
-const PUBLISHABLE_KEY = "Aod43uyyjyX_.8uRk2_POXdgu.ee14d1c521b710d2263ea75ab32c075ceaf094f10ce74daf4f51af0e191af0c8";
+const PUBLISHABLE_KEY = "FILL_IN";
 const BUTTON_BASE_URL = "https://connect-sandbox.bolt.com/v1/checkout_button";
 const EMAIL_VALIDATION_REGEX = /^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/;
 
