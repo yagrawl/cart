@@ -10,8 +10,6 @@ router.post('/create', async (req, res) => {
     const cart = req.body;
     const request = generateBoltOrderRequest(cart);
     const url = `${BOLT_URL}/v1/merchant/orders`;
-    console.log(request)
-    console.log(request.cart.items)
     const response = await fetch(url, {
         method: "post",
         body: JSON.stringify(request),
