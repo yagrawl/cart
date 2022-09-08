@@ -1,5 +1,5 @@
 export const createOrder = async (cart) => {
-    const url = new URL('http://localhost:5001/api/order/create');
+    const url = new URL('http://localhost:3333/api/order/create');
     
     const response = await fetch(url, {
         method: 'POST',
